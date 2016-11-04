@@ -1,0 +1,156 @@
+<div class="container">
+
+
+	<!-- Application Details -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Value</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2" for="text">Search:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						 ng-model="vm.searchResult" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+	
+		<div class="row inputTopMargin">
+				<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="vm.getSearch()">Submit</button>
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application Detail -->
+ 
+ <!-- Fee -->
+ 	<div class="row topMargin30"></div>
+		<div>
+				<div class="row">
+					<div class="col-md-2">
+					<div class="row">
+					<fieldset class="fieldset">
+					<div class="row">
+												<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.google">
+						</div>
+										<div class="col-md-1">
+							<p> Google</p>
+						</div>
+									</div>
+									<div class="row">
+																		<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.bing">
+						</div>
+										<div class="col-md-1">
+							<p> Bing </p>
+						</div></div>
+										<div class="row">							<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.yahoo">
+						</div>
+										<div class="col-md-1">
+							<p> Yahoo </p>
+						</div></div>		</fieldset>	
+						
+					</div>
+					<div class="row topMargin30"></div>
+					
+					<div class="row">
+					<fieldset class="fieldset">
+					<div class="row">
+									
+										<div class="col-md-2">
+							<p>test 1 5</p>
+						</div>
+									</div>
+									<div class="row">
+				
+										<div class="col-md-2">
+							<p> Product 2 </p>
+						</div></div>
+										<div class="row">				
+										<div class="col-md-2">
+							<p> Product 3 </p>
+						</div></div>		</fieldset>	
+						
+					</div>
+ </div>
+	<div class="col-md-10">
+		<table class="table" border="1">
+	<tr>
+		<th>Name of Attorney
+		</th>
+		<th> Firm		
+		</th>
+				<th> 		
+		</th>
+				<th> 		
+		</th>
+	</tr>
+	<tr ng-repeat="attorney in vm.attorneys">
+		<td>{{attorney.name}}
+		</td>
+		<td>{{attorney.firm}}
+		</td>
+		<td><input type="button" value="Show All" ng-click="vm.showChildren($index)" />
+		</td>
+				<td><input type="button" value="Edit" ng-click="vm.edit($index)" />
+		</td>
+	</tr>
+<!-- 		<tr ng-repeat="attorneys in vm.attorneys1" ng-show="vm.showA">
+		<td>{{attorneys.name}}
+		</td>
+		<td>{{attorneys.firm}}
+		</td>
+	</tr> -->
+</table>
+	</div>
+
+
+ 
+
+ </div>
+ 
+ </div>
+ 
+ <div ng-show="vm.editTable">
+  <h2>Editing Index: {{ vm.index }} </h2>
+
+  <table style="margin-bottom:10px">
+  <tr>
+  <td>
+      <table>
+        <tr ng-repeat="h in vm.head">
+          <td><input type="text" value="{{ h }}" disabled /></td>
+        </tr>
+      </table>
+  </td>
+  <td>
+      <table>
+        <tr ng-repeat="h in vm.head">
+          <td><input type="text" ng-model="vm.editfun[h]" /></td>
+        </tr>
+      </table>
+  </td>
+  </tr>
+  </table>
+  
+    <button type="button"  ng-click="vm.save(vm.index)">
+      Save
+    </button>
+
+    
+  </div>
+
+	
+	
+<!--  End Correspondence -->
+
+
+
+
+</div> <!-- End container -->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

@@ -1,0 +1,232 @@
+<div class="container">
+
+<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- Application Details -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Notice Of Allowance</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+			<label for="filingDate" class="control-label col-md-1 col-md-offset-1">Filing Date:</label>
+			<div class="col-md-1">
+				{{ vm.noaForm.filingDate }}
+			</div>
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Attorney Docket No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.docketNumber">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label for="employeeNo" class="control-label col-md-2">Employee No:</label>
+			<div class="col-md-2">{{ vm.noaForm.noaWorker.empNo }}</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label for="employeeNo" class="control-label col-md-2">GAU:</label>
+			<div class="col-md-2">{{ vm.noaForm.noaGau }}</div>
+			<label for="class" class="control-label col-md-1 col-md-offset-1">Class:</label>
+			<div class="col-md-1">
+				<input type="text" class="form-control form-control-width-md" ng-model="vm.noaForm.noaClass"/>
+			</div>
+			<label for="class" class="control-label col-md-1 col-md-offset-1">Subclass:</label>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md" ng-model="vm.noaForm.noaSubClass"/>
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+				<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="vm.getNoaInfo()">Submit</button>
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application Detail -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Data Verification -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Data Verification</h2>
+		</legend>
+		<div class="row">
+			<div class="col-md-3">
+				<fieldset class="fieldset">
+					<legend class="legendStyle">
+						<h4>Formal Drawing</h4>
+					</legend>
+					<input type="radio" name="formalDrawing" ng-model="vm.noaForm.formalDrawing" ng-value="true" /> Required <br />
+					<input type="radio" name="formalDrawing" ng-model="vm.noaForm.formalDrawing" ng-value="false" /> Not Required
+				</fieldset>
+			</div>
+			<div class="col-md-3">
+				<fieldset class="fieldset">
+					<legend class="legendStyle">
+						<h4>Oath or Declaration</h4>
+					</legend>
+					<input type="radio" name="oathDeclaration" ng-model="vm.noaForm.oathDeclaration" ng-value="true" /> Required <br />
+					<input type="radio" name="oathDeclaration" ng-model="vm.noaForm.oathDeclaration" ng-value="false" /> Not Required
+				</fieldset>
+			</div>
+			<div class="col-md-3">
+				<fieldset class="fieldset">
+					<legend class="legendStyle">
+						<h4>Biological Deposit</h4>
+					</legend>
+					<input type="radio" name="biological" ng-model="vm.noaForm.biologicalDeposit" ng-value="true" /> Required <br />
+					<input type="radio" name="biological" ng-model="vm.noaForm.biologicalDeposit" ng-value="false" /> Not Required
+				</fieldset>
+			</div>
+			<div class="row">
+				<label for="class" class="control-label col-sm-2">No of Claims Allowed:</label>
+				<div class="col-sm-1">
+					<input type="text" class="form-control form-control-width-md" ng-model="vm.noaForm.claimsNumber"/>
+				</div>
+				<label for="class" class="control-label col-sm-2">Sheets of Drawings:</label>
+				<div class="col-sm-1">
+					<input type="text" class="form-control form-control-width-md" ng-model="vm.noaForm.drawingSheets"/>
+				</div>
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2" for="text">Title of Invention:</label>
+			<div class="col-md-10">
+					<input type="textarea" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.inventionTitle">
+			</div>
+		</div>
+	</fieldset> <!-- End Data Verification -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Correspondence -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Correspondence</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2" for="text">Customer No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-blur="vm.getCustomerInfo();" ng-model="vm.noaForm.noaCorrespondenceAddress.cutomerNumber">
+						
+			</div>
+		</div>
+		<div class="row topMargin40">
+			<label class="control-label col-md-2" for="text">Address</label>
+			<div class="col-md-2">
+				<label for="name" class="control-label">Name Line One:</label>
+			</div>
+			<div class="col-md-8">
+				<input type="text" required class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.nameOne">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Name Line Two:</label>
+			</div>
+			<div class="col-md-8">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.nameTwo">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Street Line One:</label>
+			</div>
+			<div class="col-md-8">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.streetOne">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Street Line Two:</label>
+			</div>
+			<div class="col-md-8">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.streetTwo">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">City Name:</label>
+			</div>
+			<div class="col-md-8">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.city">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Postal Code:</label>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.postalCode">
+			</div>
+			<div class="col-md-2">
+				<label for="name" class="control-label">State/Province:</label>
+			</div>
+			<div class="col-md-1">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.state">
+			</div>
+			<div class="col-md-1">
+				<label for="name" class="control-label">Country:</label>
+			</div>
+			<div class="col-md-1">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.country">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Telephone No:</label>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.telephoneNumber">
+			</div>
+			<div class="col-md-2">
+				<label for="name" class="control-label">Extension No:</label>
+			</div>
+			<div class="col-md-1">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.extensionNumber">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2 col-md-offset-2">
+				<label for="name" class="control-label">Fax No:</label>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.faxNumber">
+			</div>
+			<div class="col-md-2">
+				<label for="name" class="control-label">Email:</label>
+			</div>
+			<div class="col-md-4">
+				<input type="email" class="form-control form-control-width-md" id="applicationNoId" ng-model="vm.noaForm.noaCorrespondenceAddress.email">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+				<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="">Submit</button>
+			</div>
+		</div>
+	</fieldset> <!--  End Correspondence -->
+	
+
+	
+</div> <!-- End container -->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

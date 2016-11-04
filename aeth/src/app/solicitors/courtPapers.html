@@ -1,0 +1,136 @@
+<div ng-include src="'app/utilities/alerts.html'"></div>
+<div class="modal-header">
+	<h2>Add Court Papers</h2>
+</div>
+<div class="modal-body">
+
+	<!-- Court Case -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h3>Court Case</h3>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-3" for="text">Application No: </label>
+			<div class="col-md-3">
+				 {{ vm.solicitorsForm.applicationNumber }}
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3" for="text">Docket No: </label>
+			<div class="col-md-3">
+				 {{ vm.solicitorsForm.docketNo }}
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3" for="text">Court Type: </label>
+			<div class="col-md-3">
+				 {{ vm.solicitorsForm.courtTypeDesc }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Court Case -->
+
+	<div class="topMargin30"></div>
+	
+	<!-- Mail Date and Incoming/Outgoing -->
+	<div class="row">
+		<label class="control-label col-md-3 col-md-offset-2" for="text">Mail Date: </label>
+		<div class="col-md-4">
+			<input
+				id="dp1"
+				data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+				type="date" class="datepicker form-control"
+				ng-model="vm.solicitorsForm.courtPapersMailDate"/>
+		</div>
+	</div>
+	<div class="inputTopMargin"></div>
+	<div>
+		<fieldset class="fieldset">
+			<div class="row">
+				<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Header'}">
+					<input type="radio" name="incomingOutgoing" ng-model="vm.solicitorsForm.inOutIndicator" value="{{header.codeValue}}" ng-init="vm.solicitorsForm.inOutIndicator = 1"/>{{ header.longDescription }}
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<!-- End Mail Date and Incoming/Outgoing -->
+		
+	<div class="inputTopMargin"></div>
+
+	<!-- Appellant -->
+	<fieldset class="fieldset">
+		<legend>Appellant</legend>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Appellant'}">
+				<input type="radio" name="courtPapers" ng-model="vm.solicitorsForm.selectedActionCd" value="{{header.codeValue}}"/>{{ header.longDescription }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Appellant -->
+	
+	<div class="inputTopMargin"></div>
+		
+	<!-- Appellee -->
+	<fieldset class="fieldset">
+		<legend>Appellee</legend>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Appellee'}">
+				<input type="radio" name="courtPapers" ng-model="vm.solicitorsForm.selectedActionCd" value="{{header.codeValue}}"/>{{ header.longDescription }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Appellee -->
+	
+	<div class="inputTopMargin"></div>
+		
+	<!-- Extension -->
+	<fieldset class="fieldset">
+		<legend>Extension</legend>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Extension'}">
+				<input type="radio" name="courtPapers" ng-model="vm.solicitorsForm.selectedActionCd" value="{{header.codeValue}}"/>{{ header.longDescription }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Extension -->
+	
+	<div class="inputTopMargin"></div>
+		
+	<!-- Miscellaneous Papers -->
+	<fieldset class="fieldset">
+		<legend>Miscellaneous Papers</legend>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Miscellaneous Papers'}">
+				<input type="radio" name="courtPapers" ng-model="vm.solicitorsForm.selectedActionCd" value="{{header.codeValue}}"/>{{ header.longDescription }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Miscellaneous Papers -->
+	
+	<div class="inputTopMargin"></div>
+		
+	<!-- Court Processing -->
+	<fieldset class="fieldset">
+		<legend>Court Processing</legend>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="header in vm.radioOptions | toArray | filter:{description:'Court Processing'}">
+				<input type="radio" name="courtPapers" ng-model="vm.solicitorsForm.selectedActionCd" value="{{header.codeValue}}"/>{{ header.longDescription }}
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Court Processing -->
+	
+</div>
+
+<div class="modal-footer">
+	<div class="row">
+		<div class="col-md-1 col-md-offset-1">
+			<button type="submit" class="btn btn-primary" ng-click="vm.select()">Select</button>
+		</div>
+		<div class="col-md-1 col-md-offset-1">
+			<button type="submit" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+		</div>
+	</div>
+</div>

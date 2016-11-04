@@ -1,0 +1,190 @@
+<div class="container">
+
+
+	<!-- Application Details -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Value</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2" for="text">Search:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						 ng-model="vm.searchResult" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+	
+		<div class="row inputTopMargin">
+				<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="vm.getSearch()">Submit</button>
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application Detail -->
+ 
+ <!-- Fee -->
+		<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Criteria </h2>
+		</legend>
+				<div class="row">
+
+							<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.google">
+						</div>
+										<div class="col-md-1">
+							<p> Google</p>
+						</div>
+						</div>
+						<div class = "row">
+												<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.bing">
+						</div>
+										<div class="col-md-1">
+							<p> Bing </p>
+						</div>
+						</div>
+						<div class = "row">
+													<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.yahoo">
+						</div>
+										<div class="col-md-1">
+							<p> Yahoo </p>
+						</div>	
+						</div>
+</fieldset>
+ 
+ 
+	<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Google </h2>
+		</legend>
+						
+
+<table class="table">
+	<tr>
+		<th>Name of Attorney
+		</th>
+		<th> Firm		
+		</th>
+	</tr>
+	<tr ng-repeat="attorney in vm.attorneys">
+		<td>{{attorney.name}}
+		</td>
+		<td>{{attorney.firm}}
+		</td>
+		<td><input type="button" value="Show All" ng-click="vm.showChildren($index)" />
+		</td>
+	</tr>
+<!-- 		<tr ng-repeat="attorneys in vm.attorneys1" ng-show="vm.showA">
+		<td>{{attorneys.name}}
+		</td>
+		<td>{{attorneys.firm}}
+		</td>
+	</tr> -->
+</table>
+					<div style="padding-left:110px">
+			<input type="submit" value="Add" ng-click="vm.addAttorney()" class="btn btn-primary"/>
+<!-- 						<input type="submit" value="Show" ng-click="vm.showAllA()" class="btn btn-primary"/>
+ -->			
+		</div>
+<form class="form-horizontal" role="form" ng-submit="vm.addRowAttorney()" ng-show="vm.showAttorney">
+	<div class="form-group">
+		<label class="col-md-2 control-label">Attorney Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="Attorney"
+				ng-model="vm.attorney" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Firm</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="Firm"
+				ng-model="vm.firm" />
+		</div>
+	</div>
+	
+	<div class="form-group">								
+		<div style="padding-left:110px">
+			<input type="submit" value="Submit" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+		
+
+	</fieldset> <!-- End Application Detail -->						
+							
+							
+							
+							
+				<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Bing </h2>
+		</legend>
+						
+
+<table class="table">
+	<tr>
+		<th>Name of Assignee
+		</th>
+		<th>Residence (CITY and STATE OR COUNTRY)
+		</th>
+	</tr>
+	<tr ng-repeat="company in vm.companies">
+		<td>{{company.name}}
+		</td>
+		<td>{{company.residence}}
+		</td>
+	</tr>
+<!-- 		<tr ng-repeat="companys in vm.companies1" ng-show="vm.showC">
+		<td>{{companys.name}}
+		</td>
+		<td>{{companys.residence}}
+		</td>
+	</tr> -->
+</table>
+					<div style="padding-left:110px">
+			<input type="submit" value="Add" ng-click="vm.add()" class="btn btn-primary"/>
+<!-- 			<input type="submit" value="Show" ng-click="vm.showAllC()" class="btn btn-primary"/>
+ -->		</div>
+<form class="form-horizontal" role="form" ng-submit="vm.addRow()" ng-show="vm.show">
+	<div class="form-group">
+		<label class="col-md-2 control-label">Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="name"
+				ng-model="vm.name" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Residence</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="employees"
+				ng-model="vm.residence" />
+		</div>
+	</div>
+	<div class="form-group">								
+		<div style="padding-left:110px">
+			<input type="submit" value="Submit" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+		
+
+	</fieldset> <!-- End Application Detail -->
+	
+	
+<!--  End Correspondence -->
+
+
+
+
+</div> <!-- End container -->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

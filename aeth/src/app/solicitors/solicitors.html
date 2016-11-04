@@ -1,0 +1,172 @@
+<div class="container">
+
+	<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- Search By -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Solicitors</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Application
+				No:</label>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="applicationNoId" ng-model="vm.solicitorsForm.applicationNumber" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Docket
+				No:</label>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="docketNo" ng-model="vm.solicitorsForm.searchByDocketNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+
+		<div class="inputTopMargin"></div>
+
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">PALM
+				Location:</label>
+			<div class="col-md-4">{{ vm.solicitorsForm.palmLocation }}</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Title
+				Of Invention:</label>
+			<div class="col-md-4">{{ vm.solicitorsForm.inventionTitle }}</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary"
+					ng-click="vm.getCourtCases()">Search</button>
+			</div>
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+		</div>
+	</fieldset>
+	<!-- End Search By -->
+
+	<div class="topMargin30"></div>
+
+	<!-- Court Case -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Court Case </h2>
+		</legend>
+		<table show-filter="true" class="table table-striped table-info">
+			<tr>
+				<th></th>
+				<th>Docket No</th>
+				<th>Court Type</th>
+				<th>Number</th>
+			</tr>
+			<tr ng-repeat="courtCase in vm.solicitorsForm.courtCases">
+				<td><input type="radio" name="courtPapers"
+					ng-change="vm.setCurrentPaper(courtCase)"
+					ng-model="vm.courtCaseValue" value="{{$index}}" /></td>
+
+				<!-- 				<td><button ng-click="vm.setCurrentPaper(courtCase)">Select</button></td> -->
+				<td>{{ courtCase.solicitorCourtInfo.docketNo }}</td>
+				<td>{{ courtCase.solicitorCourtInfo.courtTypeDesc }}</td>
+				<td>{{ courtCase.solicitorCourtInfo.employeeNo }}</td>
+			</tr>
+		</table>
+	</fieldset>
+	<!-- End Court Case -->
+
+	<div class="topMargin30"></div>
+
+	<!-- Court Case Details  -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Court Case Details</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Court
+				Type:</label>
+			<div class="col-md-2">
+				<select type="text" class="form-control form-control-width-md"
+					id="courtType" ng-model="vm.solicitorsForm.selectedCourtType"
+					ng-options="courtType.description for courtType in vm.solicitorsForm.courtTypeList"></select>
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Docket
+				No:</label>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="docketNo" ng-model="vm.solicitorsForm.docketNo">
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Employee
+				No:</label>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="employeeName" ng-model="vm.solicitorsForm.employeeNo">
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default"
+					ng-click="vm.openEmployeeName()">...</button>
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary"
+					ng-click="vm.addCourtCaseDetails()">Add</button>
+			</div>
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-warning"
+					ng-click="vm.updateCourtCaseDetails()">Update</button>
+			</div>
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-danger" ng-disabled="true">Delete</button>
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+
+		<!-- Case Papers -->
+		<fieldset class="fieldset">
+			<legend>
+				<h2>Case Papers</h2>
+			</legend>
+			<table show-filter="true" class="table table-striped table-info">
+				<tr>
+					<th></th>
+					<th>Description</th>
+					<th>I/O</th>
+					<th>Mail Date</th>
+				</tr>
+				<tr ng-repeat="courtPapers in vm.currentCase.casePapers">
+					<td><input type="radio" name="courtPapers"
+						ng-model="vm.solicitorsForm.selected"
+						value="{{courtPapers.contentCd}}" /></td>
+					<td>{{ courtPapers.description }}</td>
+					<td>{{ courtPapers.inOutIndicator}}</td>
+					<td>{{ courtPapers.mailDt | date:'MM-dd-yyyy' }}</td>
+				</tr>
+			</table>
+			<div class="inputTopMargin"></div>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<button type="submit" class="btn btn-primary"
+						ng-click="vm.addCasePapers()">Add Case</button>
+				</div>
+				<div class="col-md-1 col-md-offset-1">
+					<button type="submit" class="btn btn-danger" ng-disabled="true">Remove
+						Case</button>
+				</div>
+			</div>
+		</fieldset>
+		<!-- End Case Papers -->
+
+	</fieldset>
+	<!-- End Court Case Details -->
+
+</div>
+<!-- End container -->

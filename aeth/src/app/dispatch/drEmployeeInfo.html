@@ -1,0 +1,40 @@
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Search For Employee: </label>
+			<div class="col-md-2">
+			<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" placeholder="Employee Number" ng-model="vm.dispatchForm.searchEmployeeNumber"
+						ng-keyup="vm.searchKeyEvent($event)"/>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+					ng-click="vm.getCurrentEmployee();">Search</button>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default"
+				ng-click="vm.clear();">Clear</button>
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Employee:</label>
+			<div class="col-md-2">{{ vm.dispatchForm.currentEmployee.worker.empNo }}</div>
+			<div class="col-md-4">{{ vm.dispatchForm.currentEmployee.worker.givenName }} {{ vm.dispatchForm.currentEmployee.worker.familyName }}</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">PALM Location:</label>
+			<div class="col-md-4">{{ vm.dispatchForm.currentEmployee.palmLocation }}</div>
+		</div>
+
+		<div class="inputTopMargin"></div>
+
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Primary
+				Location:<br>(Building/Floor/Room)</label>
+			<div class="col-md-4">{{ vm.dispatchForm.currentLocation }}</div>
+		</div>
+		
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label for="lastApplicationNumber" class="control-label col-md-3 col-md-offset-1">Last Application Number:</label>
+			<div class="col-md-2"><strong>{{ vm.lastApplicationNumber }}</strong></div>
+		</div>

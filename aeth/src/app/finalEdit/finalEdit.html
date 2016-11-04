@@ -1,0 +1,80 @@
+<div class="container">
+
+<h1>{{vm.title}}</h1>
+
+<input type="file" id="fileUpload" "/>
+
+
+<input type="button" id="upload" value="Upload" ng-click="vm.upload()" />
+<input type="button" id=download" value="Download" ng-click="vm.down()" />
+
+
+
+
+<table class = "table", ng-show = "vm.display", border = "1">
+  <tr>
+  	<th> Edit </th>
+      <th ng-repeat="header in vm.head">{{header}}</th>
+  </tr>
+  <tr ng-repeat="dat in vm.data">
+  <td>
+  	<input type="button" id="edit" value="Edit" ng-click="vm.edit($index)" />
+  	</td>
+    <td ng-repeat="header in vm.head"><span ng-model="test">{{dat[header]}}</span></td>
+  </tr>
+</table>
+
+
+
+
+<div ng-show="vm.editTable">
+  <h2>Editing Index: {{ vm.index }} </h2>
+
+  <table style="margin-bottom:10px">
+  <tr>
+  <td>
+      <table>
+        <tr ng-repeat="h in vm.head">
+          <td><input type="text" value="{{ h }}" disabled /></td>
+        </tr>
+      </table>
+  </td>
+  <td>
+      <table>
+        <tr ng-repeat="h in vm.head">
+          <td><input type="text" ng-model="vm.editfun[h]" /></td>
+        </tr>
+      </table>
+  </td>
+  </tr>
+  </table>
+  
+    <button type="button"  ng-click="vm.save(vm.index)">
+      Save
+    </button>
+
+    
+  </div>
+
+</div>
+
+
+
+
+<!--  <div ng-show = "vm.editTable">
+<input type = "button" id= "save" value = "Save" ng-click = "vm.save()">
+
+<table class = "table" ng-show="vm.editTable">
+  <tr>
+      <th ng-repeat="header in vm.head">{{header}}</th>
+  </tr>
+  <tr ng-repeat="data in vm.data">
+    <td ng-repeat="header in vm.head"><input type ="text" value = "{{data[header]}}"></td>
+  </tr>
+  
+</table>
+</div>
+ -->
+
+
+

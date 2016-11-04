@@ -1,0 +1,12 @@
+<div class="row topMargin40"></div>
+<div class="alert"
+	ng-class="{'alert-danger': vm.notification.notice == 'danger', 
+		'alert-warning': vm.notification.notice == 'warning', 
+		'alert-success': vm.notification.notice == 'success'}"
+	ng-show="vm.notification.showNotice">
+	<i class="fa"
+		ng-class="{'fa-times': vm.notification.notice == 'danger',
+			'fa-exclamation': vm.notification.notice == 'warning', 
+			'fa-check': vm.notification.notice == 'success'}"></i>
+	{{vm.notification.noticeMsg}}
+</div>

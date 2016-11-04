@@ -1,0 +1,68 @@
+<div class="container">
+
+<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- <div class="row topMargin30"></div>
+	
+	<div class="alert alert-danger" ng-show="vm.ptaForm.errorFound">
+		<i class="fa fa-times"></i>
+		{{vm.ptaForm.errorMsg}}
+	</div>
+	
+	<div class="alert alert-warning" ng-show="vm.ptaForm.warningFound">
+		<i class="fa fa-exclamation"></i>
+		{{vm.ptaForm.warningMsg}}
+	</div>
+		
+	<div class="alert alert-success" ng-show="vm.ptaForm.successFound">
+		<i class="fa fa-check"></i>
+		{{vm.ptaForm.successMsg}}
+	</div> -->
+	
+	<!-- Patent Term Adjustment -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Patent Term Adjustments</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.ptaForm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+		<label for="text" class="control-label col-md-2 col-md-offset-1">Responsible Party:</label>
+			<input type="radio" name="responsibleParty" ng-model="vm.ptaForm.responsibleParty"  value="PTO" /> PTO
+			<input type="radio" name="responsibleParty" ng-model="vm.ptaForm.responsibleParty" value="APPL" /> Applicant
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Adjustment Duration:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="adjustmentDuration" ng-model="vm.ptaForm.adjustmentDuration" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Reason:</label>
+			<div class="col-md-2">
+					<select class="form-control" id="sel1"
+					ng-model="vm.ptaForm.reason">
+					<!-- ng-blur="vm.getReasonInfo()"> -->
+					<option value="NONE">NONE</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary" ng-click="vm.postPTAAction()">Submit</button>
+			</div>
+			<div class="col-md-1">
+						<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+		</div>
+		
+
+	</fieldset> <!-- End Patent Term Adjustment -->
+	
+</div> <!-- End container -->

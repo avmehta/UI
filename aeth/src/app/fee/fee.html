@@ -1,0 +1,413 @@
+<div class="container">
+
+
+	<!-- Application Details -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Application Number</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+	
+		<div class="row inputTopMargin">
+				<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="vm.getfeeInfo()">Submit</button>
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application Detail -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Data Verification -->
+		<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Application Info </h2>
+		</legend>
+		<table show-filter="true" class="table table-striped table-info">
+			<tr>
+				<th>APPLICATION NO.</th>
+				<th>FILING DATE</th>
+				<th>FIRST NAMED INVESTOR</th>
+				<th>ATTORNEY DOCKET NO.</th>
+				<th>CONFIRMATION NO.</th>
+			</tr>
+			<tr>
+
+				<td>{{vm.appNo}}</td>
+				<td>{{ vm.filingDate }}</td>
+				<td>{{ vm.investor }}</td>
+				<td>{{ vm.docketNo }}</td>
+				<td>{{ vm.confirmationNo }}</td>
+			</tr>
+			<tr>
+				<th>APPLN. TYPE</th>
+				<th>ENTITY STATUS</th>
+				<th>ISSUE FEE DUE</th>
+				<th>PUBLICATION FEE DUE</th>
+				<th>PREV. PAID ISSUE FEE</th>
+			</tr>
+						<tr>
+
+
+				<td>{{ vm.appType }}</td>
+				<td>{{ vm.status }}</td>
+				<td>{{ vm.issueFee }}</td>
+				<td>{{ vm.pubFee }}</td>
+				<td>{{ vm.prevPay }}</td>
+			</tr>
+						<tr>
+				<th>TOTAL FEE(S) DUE</th>
+				<th>DATE DUE</th>
+				<th>EXAMINER</th>
+				<th>ART UNIT</th>
+				<th>CLASS-SUBCLASS</th>
+			</tr>
+						<tr>
+
+				<td>{{ vm.totalFee }}</td>
+				<td>{{ vm.dateDue }}</td>
+				<td>{{ vm.Examiner }}</td>
+				<td>{{ vm.artUnit }}</td>
+				<td>{{ vm.classSub }}</td>
+			</tr>
+		</table>
+	</fieldset> <!-- End Data Verification -->
+	
+	
+	<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>CORRESPONDENCE ADDRESS </h2>
+		</legend>
+		<div class="row">
+			<p>1. Change of correspondence address or indication of "Fee Address" (37 CFR 1.363)</p>
+			</div>
+
+			<div class="row">
+						<div class="col-md-1">
+							<input type="checkbox"
+								ng-model="vm.change">
+						</div>
+
+						<div class="col-md-3">
+							<p>Change Correspondence address (or Change of Correspondence Address form PTO/SB/122) attached.</p>
+						</div>		
+												<div class="col-md-1">
+							<input type="checkbox"
+								ng-model="vm.feeAddress">
+						</div>
+
+						<div class="col-md-3">
+							<p>"Fee Address" indication (or "Fee Address" Indication form PTO/SB/47; Rev 03-02 or more recent) attached.</p>
+							<strong p> Use of a Customer Number is required</strong>
+						</div>	
+							</div>
+							</fieldset> 
+	<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>ATTORNEY </h2>
+		</legend>
+		<div class="row">
+			<p>2.For printing on the patent front page, list</p>
+						<p>(1) the names of up to 3 registered patent attorneys or agents OR, alternatively, </p>
+						<p>(2) the name of a single firm (having as a member a registered attorney or agent) and the names of up to 2 registered patent attoryneys or agents. If no name is listed, no name will be printed. </p>
+			</div>
+						
+
+<table class="table">
+	<tr>
+		<th>Name of Attorney
+		</th>
+		<th> Firm		
+		</th>
+	</tr>
+	<tr ng-repeat="attorney in vm.attorneys">
+		<td>{{attorney.name}}
+		</td>
+		<td>{{attorney.firm}}
+		</td>
+
+		<td> <button ng-click = "vm.DeleteAttorney($index)" value = "Delete">Delete</button>
+		</td>
+	</tr>
+</table>
+					<div style="padding-left:110px">
+			<input type="submit" value="Add" ng-click="vm.addAttorney()" class="btn btn-primary"/>
+		</div>
+<form class="form-horizontal" role="form" ng-submit="vm.addRowAttorney()" ng-show="vm.showAttorney">
+	<div class="form-group">
+		<label class="col-md-2 control-label">Attorney Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="Attorney"
+				ng-model="vm.attorney" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Firm</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="Firm"
+				ng-model="vm.firm" />
+		</div>
+	</div>
+	
+	<div class="form-group">								
+		<div style="padding-left:110px">
+			<input type="submit" value="Submit" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+		
+
+	</fieldset> <!-- End Application Detail -->						
+							
+							
+							
+							
+				<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>ASSIGNEE </h2>
+		</legend>
+		<div class="row">
+			<p>3. ASSIGNEE NAME AND RESIDENCE DATA TO BE PRINTED ON THE PATENT</p>
+						<p> PLEASE NOTE: Unless an assignee is identified below, no assignee data will appear on the patent. If an assignee is identified below, the document has been filed for recordation as set forth in 37 CFR 3.11. Completion of this form is NOT a substitute for filing an assignment </p>
+			
+			</div>
+						
+
+<table class="table">
+	<tr>
+		<th>Name of Assignee
+		</th>
+		<th>Residence (CITY and STATE OR COUNTRY)
+		</th>
+		<th>Assignee Category
+		</th>
+	</tr>
+	<tr ng-repeat="company in vm.companies">
+		<td>{{company.name}}
+		</td>
+		<td>{{company.residence}}
+		</td>
+		<td>{{company.category}}
+		</td>
+		<td> <button ng-click = "vm.Delete($index)" value = "Delete">Delete</button>
+		</td>
+	</tr>
+</table>
+					<div style="padding-left:110px">
+			<input type="submit" value="Add" ng-click="vm.add()" class="btn btn-primary"/>
+		</div>
+<form class="form-horizontal" role="form" ng-submit="vm.addRow()" ng-show="vm.show">
+	<div class="form-group">
+		<label class="col-md-2 control-label">Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="name"
+				ng-model="vm.name" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Residence</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="employees"
+				ng-model="vm.residence" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Assignee Category</label>
+		<div class="col-md-1">
+			<input type="radio" class="form-control" name="category"
+				ng-model="vm.category" value="Individual" required />
+		</div>
+		<div class="col-md-2">
+<label for="text">Individual</label>		</div>
+		<div class="col-md-1">
+			<input type="radio" class="form-control" name="category"
+				ng-model="vm.category" value="Corporation" required/>
+		</div>
+		<div class="col-md-2">
+<label for="text">Corporation or other private group entity</label>		</div>
+		<div class="col-md-1">
+			<input type="radio" class="form-control" name="category"
+				ng-model="vm.category" value="Government" required/>
+		</div>
+		<div class="col-md-2">
+<label for="text">Government</label>		</div>
+	</div>
+	<div class="form-group">								
+		<div style="padding-left:110px">
+			<input type="submit" value="Submit" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+		
+
+	</fieldset> <!-- End Application Detail -->
+	
+	
+<!--  End Correspondence -->
+
+	<div class="row topMargin30"></div>
+	
+	<!-- Fee -->
+		<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Fee </h2>
+		</legend>
+				<div class="row">
+			<div class="col-md-5">
+			<p> 4a. The following fee(s) are submitted: </p>
+			<div class = "row">
+									<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.issFee">
+						</div>
+										<div class="col-md-4">
+							<p> Issue Fee </p>
+						</div>
+						</div>
+						<div class = "row">
+												<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.publicationFee">
+						</div>
+										<div class="col-md-4">
+							<p> Publication Fee </p>
+						</div>
+						</div>
+						<div class = "row">
+													<div class="col-md-1">
+							<input type="checkbox"
+								ng-model="vm.copies">
+						</div>
+										<div class="col-md-4">
+							<p> Advanced Order - # of Copies </p>
+						</div>	
+						</div>
+						
+			</div>
+					<div class="col-md-7">
+			<p> 4b. Payment of Fee(s): (<strong>Please first reapply any previously paid issue fee shown above</strong>) </p>
+			<div class = "row">
+									<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.checkEnclosed">
+						</div>
+										<div class="col-md-6">
+							<p> A check is enclosed </p>
+						</div>
+						</div>
+						<div class = "row">
+												<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.payCredit">
+						</div>
+										<div class="col-md-6">
+							<p> Payment by credit card. Form PTO-2038 is attached. </p>
+						</div>
+						</div>
+						<div class = "row">
+													<div class="col-md-1">
+							<input type="checkbox"
+								ng-model="vm.authorize">
+						</div>
+										<div class="col-md-6">
+							<p> The Director is authorized to charge the required fee(s), any deficiency, or credit any overpayment, to Deposit Account Number <strong>19-4880</strong> (enclose an extra copy of this form) </p>
+						</div>	
+						</div>
+						
+			</div>
+			
+		</div>
+	
+
+	</fieldset> <!-- Fee -->
+
+		<div class="row topMargin30"></div>
+	
+	<!-- Fee -->
+		<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Entity Status </h2>
+		</legend>
+				<div class="row">
+			<div class="col-md-5">
+			<p> <strong>Change in Entity Status </strong>(from status indicated above)</p>
+			<div class = "row">
+									<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.micro">
+						</div>
+										<div class="col-md-4">
+							<p> Applicant certifying micro entity status. See 37 CFR 1.29 </p>
+						</div>
+						</div>
+						<div class = "row">
+												<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.entSmall">
+						</div>
+										<div class="col-md-4">
+							<p> Applicant asserting small entity status. See 37 CFR 1.27 </p>
+						</div>
+						</div>
+						<div class = "row">
+													<div class="col-md-1">
+							<input type="checkbox" 
+								ng-model="vm.entReg">
+						</div>
+										<div class="col-md-4">
+							<p> Applicant changing to regular undiscounted fee status </p>
+						</div>	
+						</div>
+						
+			</div>
+					<div class="col-md-7">
+								<p> </p>
+					
+			<div class = "row">
+
+										<div class="col-md-7">
+							<p><strong>NOTE: </strong>Absent a valid certification of Micro Entity Status (see form PTO/SB/15A and 15B),issue fee payment in the micro entity amount will not be accepted at the risk of application abandonment.</p>
+						</div>
+						</div>
+						<div class = "row">
+												
+										<div class="col-md-7">
+							<p><strong>NOTE: </strong>If the application was previously under micro entity status, checking this box will be taken to be a notification of loss of entitlement to micro entity status.</p>
+						</div>
+						</div>
+						<div class = "row">
+													
+										<div class="col-md-7">
+							<p> <p><strong>NOTE: </strong>Checking this box will be taken to be a notification of loss of entitlement to small or micro entity status, as applicable.</p> </p>
+						</div>	
+						</div>
+						
+			</div>
+			
+		</div>
+
+	</fieldset> <!-- Fee -->
+	
+	<fieldset>
+	<div class="row topMargin30"></div>
+	    <button type="button"  ng-click="vm.submitAll()" class="btn btn-primary">
+      Submit
+    </button>    <button type="button"  ng-click="vm.clear()" class="btn btn-primary">
+      Clear
+    </button>
+	</fieldset>
+</div> <!-- End container -->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

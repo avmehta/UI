@@ -1,0 +1,48 @@
+<div class="container">
+
+	<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- Dispatch PCT to GAU -->
+	<fieldset class="fieldset" ng-disabled="vm.isLoading">
+		<legend class="legendStyle">
+			<h2>Dispatch PCT to GAU</h2>
+		</legend>
+
+		<div ng-include src="'app/dispatch/drEmployeeInfo.html'"></div>
+
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Transaction:</label>
+			<div class="col-md-4">
+				<select type="text" class="form-control form-control-width-md"
+					id="transaction" ng-model="vm.dispatchForm.selectedTransaction"
+					ng-options="transaction.descriptionTx for transaction in vm.pctActionList"></select>
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Dispatch To GAU:</label>
+			<div class="col-md-2">
+			<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.dispatchForm.dispatchPalmLocation"
+						ng-blur="" />
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-3 col-md-offset-1" for="text">Application No:</label>
+			<div class="col-md-2">
+			<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.dispatchForm.applicationNumber" />
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-primary"
+				ng-click="vm.setPctToGau();">Submit</button>
+			</div>
+		</div>
+		
+	</fieldset>
+	<!-- End Dispatch PCT to GAU -->
+
+</div>
+<!-- End container -->

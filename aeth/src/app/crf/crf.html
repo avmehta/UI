@@ -1,0 +1,118 @@
+<div class="container">
+
+<div ng-include src="'app/utilities/alerts.html'"></div>
+
+ 		<!-- <div class="row topMargin40"></div>
+ 		
+		<div class="alert alert-danger" ng-show="vm.crfForm.errorFound">
+			<i class="fa fa-times"></i>
+			{{vm.crfForm.errorMsg}}
+			<table>
+			
+			
+			<tr ng-repeat="action in vm.crfForm.extndReturns">
+				<td>{{action.messageDesc}}</td>
+							
+			</tr>
+			</table>
+		</div>
+		
+		<div class="alert alert-warning" ng-show="vm.crfForm.warningFound">
+			<i class="fa fa-exclamation"></i>
+			{{vm.crfForm.warningMsg}}
+		</div>
+	
+		<div class="alert alert-success" ng-show="vm.crfForm.successFound">
+			<i class="alert-icon-success alert-icon"></i>
+			{{vm.crfForm.successMsg}}
+		</div> -->
+		
+	<!-- Application Detail -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>CRF</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.crfForm.applicationNo">
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application Detail -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Application Related Actions -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Application Related Actions</h2>
+		</legend>
+
+		<table show-filter="true" class="table table-striped table-info">
+			<tr>
+			    <th>Submission Code</th>
+				<th>Application No</th>
+				<th>Action</th>				
+			</tr>
+
+			<tr ng-repeat="action in vm.reExamActionsLogData">
+			
+			    <td>{{action.crfSubmissionCd}}</td>
+				<td>{{action.applicationNumber}}</td>
+				<td>{{action.postingTransaction}}</td>				
+			</tr>
+		</table>
+
+	</fieldset> <!-- End Application Related Actions -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Actions -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Actions</h2>
+		</legend>
+		<div class="row">
+		<label class="control-label col-md-2 col-md-offset-1" for="text">Actions:</label>
+			<div class="col-md-5">
+				<select class="form-control" id="sel1"
+					ng-model="vm.crfForm.actionSelected"					
+					ng-options="actionDetails.contentEventCd as (actionDetails.contentEventCd + '::'+ actionDetails.descriptionTx ) for actionDetails in vm.actionList">
+				</select>
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Mail Date:</label>
+			<div class="col-md-2">
+				<span class="input-icon icon icon-calendar-o"></span> <input
+					id="dp1"
+					data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+					type="date" class="datepicker form-control"
+					ng-model="vm.crfForm.reExamMailDate">
+			</div>
+			
+		</div>
+		
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">New Submission:</label>
+			<div class="col-md-2">
+			<input	type="checkbox"				ng-model="vm.crfForm.newCrfSubmissionIn">
+			</div>
+			
+		</div>
+		
+		<div class="row topMargin30"></div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary" ng-click="vm.postCrfAction()">OK</button>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+		</div>
+	</fieldset> <!-- End Actions -->
+	
+</div> <!-- End container -->
+

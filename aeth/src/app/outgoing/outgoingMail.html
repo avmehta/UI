@@ -1,0 +1,203 @@
+
+	<div class="container">
+	
+	<div ng-include src="'app/utilities/alerts.html'"></div>
+
+		<!-- <div class="row topMargin40"></div>
+		<div class="alert alert-danger" ng-show="vm.outgoingForm.mailListErrorFound">
+			<i class="fa fa-times"></i>
+			{{vm.outgoingForm.mailListErrorMsg}}
+		</div>
+		
+		<div class="alert alert-warning" ng-show="vm.outgoingForm.mailListWarningFound">
+			<i class="fa fa-exclamation"></i>
+			{{vm.outgoingForm.mailListWarningMsg}}
+		</div>
+
+		<div class="alert alert-success" ng-show="vm.outgoingForm.mailListSuccessFound">
+			<i class="fa fa-check"></i>
+			{{vm.outgoingForm.mailListSuccessMsg}}
+		</div> -->
+		
+		<fieldset class="fieldset">
+			<legend class="legendStyle">
+				<h2>Outgoing Correspondence</h2>
+			</legend>
+			<div class="row">
+
+				<label class="control-label col-md-2 col-md-offset-1" for="text">Application
+					No:</label>
+				<div class="col-md-2">
+
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.outgoingForm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+				</div>
+
+			</div>
+
+			<div class="row topMargin30">
+				<div class="col-md-2 col-md-offset-1">
+
+					<button type="submit" class="btn btn-primary"
+						ng-click="vm.getMailingActions()">Search</button>
+				</div>
+				<div class="col-md-1">
+					<button type="submit" class="btn btn-default" ng-click="vm.clearAll()">Clear</button>
+				</div>
+
+			</div>
+		</fieldset>
+		
+		<fieldset class="fieldset topMargin30">
+
+
+
+			<legend class="legendStyle">
+				<h2>Office Action(s) to be Mailed</h2>
+			</legend>
+
+			<table show-filter="true" class="table table-striped table-info">
+				<tr>
+					<th>Select</th>
+					<th>Description</th>
+					<th>Date Counted</th>
+					<th>Delivery Mode</th>
+					<th>Mail Date</th>
+					<th>Next Business Day</th>
+					<th>Shortened Statutory Period</th>
+				</tr>
+
+				<tr ng-repeat="user in vm.mailingActionsData">
+
+					<td data-title="" header-class="'text-left'"><input
+					type="checkbox" ng-checked="vm.selection.indexOf(user.postingActionDesc) > -1" 
+					ng-click="vm.toggleSelection(user)"
+					value="{{user.seqNo}}"></td>
+					
+					
+<!-- 						type="checkbox" ng-model="vm.selectedRows" value="{{user.postingActionDesc}}"></td>   -->
+					
+
+					<td>{{user.postingActionDesc}}</td>
+					<td>{{user.parentRecordedDate}}</td>
+					<td>{{user.deliveryMode}}</td>
+					<td>{{user.mailRoomDisplayDate}}</td>
+
+					<td data-title="" header-class="'text-left'"><input
+						type="checkbox" ng-model="user.nxtBusDayInd"
+						ng-change="vm.getMailRoomDate(user.postingActionCd,user.nxtBusDayInd,user.seqNo)"
+						ng-disabled="user.nxtBusDayDisableChk"></td>
+
+					<td>
+						<div class="row" ng-show="user.responseReqInd">
+
+							<input class="col-md-2" type="text"
+								ng-model="user.shortenedStatutoryPeriod"
+								value="{{user.shortenedStatutoryPeriod}}">
+
+
+							<div class="col-md-6">
+								<select class="form-control"
+									ng-init="user.shortenedStatutoryPeriodCd = user.shortenedStatutoryPeriodCd"
+									ng-model="user.shortenedStatutoryPeriodCd"
+									ng-options="shortStatutoryPeriodCd.value as shortStatutoryPeriodCd.code for shortStatutoryPeriodCd in vm.shortStatutoryPeriodCdList">
+
+								</select>
+							</div>
+						</div>
+
+					</td>
+				</tr>
+
+			</table>
+
+			<div class="row topMargin30">
+				<div class="col-md-1 col-md-offset-1">
+
+					<button type="submit" class="btn btn-primary"
+						ng-click="vm.postMailingActions()">OK</button>
+				</div>
+
+
+			</div>
+
+
+		</fieldset>
+
+
+
+
+		<fieldset class="fieldset topMargin40">
+
+
+
+			<legend class="legendStyle">
+				<h2>Transaction Log</h2>
+			</legend>
+
+			<table show-filter="true" class="table">
+				<tr>
+					<th>Application</th>
+					<th>Description</th>
+					<th>Delivery Mode</th>		
+					<th>Status</th>			
+					<th>Document</th>
+				</tr>
+				<tr ng-repeat="user in vm.mailingActionsLogData">
+
+					<td>{{user.applicationNumber}}</td>
+					
+					
+					<td>
+						<div class="alert alert-danger" ng-show="user.error">
+
+							{{user.messageDesc}}
+							</div>
+
+						<div ng-show="user.success">{{user.postingActionDesc}}</div>
+
+						<div class="alert alert-warning" ng-show="user.warningFound">
+
+							{{user.messageDesc}}
+						</div>
+					</td>
+					<td>{{user.deliveryMode}}</td>
+					<td>
+						<div class="alert alert-danger" ng-show="user.error">
+
+							{{user.status}}</div>
+
+						<div class="alert alert-success" ng-show="user.success">
+
+							{{user.status}}</div>
+							
+					</td>
+
+					<td>
+
+
+
+						<div ng-show="user.success">
+
+							<div ng-show="user.showPdf">
+								<a ng-click="vm.openPdfFromService(user)"><img
+									ng-src="assets/images/pdficon_small.gif" border="0"
+									alt="Click to open PDF document" /></a>
+							</div>
+						</div>
+
+
+
+					</td>
+									
+				
+				</tr>
+			</table>
+
+
+		</fieldset>
+
+
+
+
+	</div>

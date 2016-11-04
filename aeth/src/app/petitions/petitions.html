@@ -1,0 +1,160 @@
+<div class="container">
+
+		<div class="row" style="margin-top: 40px;"></div>
+		<div class="alert alert-danger" ng-show="vm.petitionsForm.errorFound">
+			<i class="fa fa-times"></i>
+			{{vm.petitionsForm.errorMsg}}
+		</div>
+		
+		<div class="alert alert-warning" ng-show="vm.petitionsForm.warningFound">
+			<i class="fa fa-exclamation"></i>
+			{{vm.petitionsForm.warningMsg}}
+		</div>
+
+		<div class="alert alert-success" ng-show="vm.petitionsForm.successFound">
+			<i class="fa fa-check"></i>
+			{{vm.petitionsForm.successMsg}}
+		</div>
+
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Petitions</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.petitionsForm.applicationNo">
+			</div>
+		</div>
+
+	</fieldset> <!-- End Application -->
+	
+	<fieldset class="fieldset topMargin30">
+		<legend class="legendStyle">
+			<h2>Petitions Transaction Log</h2>
+		</legend>
+
+		<table show-filter="true" class="table table-striped table-info">
+			<tr>
+				<th>Application No</th>
+				<th>Initial Type</th>
+				<th>Decided Type</th>
+				<th>Decision</th>			
+			</tr>
+
+			<tr ng-repeat="petition in vm.petitionActionsLogData">
+				<td>{{petition.applicationNumber}}</td>
+				<td>{{petition.initialPetitionType}}</td>
+				<td>{{petition.decidedPetitionType}}</td>
+				<td>{{petition.decision}}</td>			
+			</tr>
+		</table>
+
+	</fieldset> <!-- End Application Related Actions -->
+
+	<div class="row" style="margin-top: 30px;"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Petition Details</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Mailroom Date:</label>
+			<div class="col-md-2">
+				<span class="input-icon icon icon-calendar-o"></span> <input
+					id="dp1"
+					data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+					type="date" class="datepicker form-control"
+					ng-model="vm.petitionsForm.mailRoomDate">
+			</div>
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Decision:</label>
+			<div class="col-md-3 ">
+				<select class="form-control" id="sel1"
+					ng-model="vm.petitionsForm.decisionSelected"
+					ng-blur="vm.petitionsDecisionList()"
+					ng-options="decisionDetails as decisionDetails for decisionDetails in vm.decisionList">
+				</select>
+			</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Cert of Mail Date:</label>
+			<div class="col-md-2">
+				<span class="input-icon icon icon-calendar-o"></span> <input
+					id="dp1"
+					data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+					type="date" class="datepicker form-control"
+					ng-model="vm.petitionsForm.certificateMailDate">
+			</div>
+			<label class="control-label col-md-1 col-md-offset-1" for="text">Decision Date:</label>
+			<div class="col-md-2">
+				<span class="input-icon icon icon-calendar-o"></span> <input
+					id="dp1"
+					data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+					type="date" class="datepicker form-control"
+					ng-model=" vm.petitionsForm.decisionDate">
+			</div>
+			<label class="control-label col-md-1" for="text">Delivery Mode:</label>
+			<div class="col-md-1">{{ vm.deliveryInfo.deliveryMode }}</div>
+		</div>
+		<div class="inputTopMargin"></div>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Decision Mail Date:</label>
+			<div class="col-md-2">{{ vm.petitionsForm.decisionMailDate }}</div>
+			<label class="control-label col-md-2" for="text">Next Business Day:</label>
+			<input type="checkbox" ng-model="vm.deliveryInfo.nxtBusDayInd"
+			ng-change="vm.getMailRoomDate(vm.deliveryInfo.nxtBusDayInd)"
+			 ng-disabled="vm.deliveryInfo.nxtBusDayDisableChk">
+		</div>
+		<div class="row inputTopMargin">
+		<label class="control-label col-md-2 col-md-offset-1" for="text">Initial Petition Type:</label>
+			<div class="col-md-8">
+				<select class="form-control" 
+					ng-model="vm.petitionsForm.petitionTypeSelected"
+					
+					ng-options="petitionsType.petitionTypeCd + ' :: ' + petitionsType.description for petitionsType in vm.petitionsTypeList">
+				</select>
+			</div>
+		</div>
+		<!-- <div class="row inputTopMargin">
+		<label class="control-label col-md-2 col-md-offset-1" for="text">Initial Deciding Officer:</label>
+			<div class="col-md-8">
+				<select class="form-control" id="sel1"
+					ng-model="vm.incomingForm.actionSelected"
+					ng-blur="vm.getSeletedActionNo()"
+					ng-options="actionDetails.contentEventCd as (actionDetails.transactionNo + '::'+actionDetails.transactionQualifier  + '::'+ actionDetails.descriptionTx ) for actionDetails in vm.actionList">
+				</select>
+			</div>
+		</div> -->
+		<div class="row inputTopMargin">
+		<label class="control-label col-md-2 col-md-offset-1" for="text">Decided Petition Type:</label>
+			<div class="col-md-8">
+				<select class="form-control" id="sel1"
+					ng-model="vm.petitionsForm.decidedPetitionTypeSelected"
+					ng-blur="vm.getDeliveryInfo()"
+					ng-options="decisionType.petitionTypeCd + ' :: ' + decisionType.description for decisionType in vm.decisionTypeList">
+				</select>
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Adjustment Duration:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="adjustmentDuration" ng-model="vm.petitionsForm.adjustmentDuration">
+			</div>
+		</div>
+		
+		<div class="row" style="margin-top: 30px;"></div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary" ng-click="vm.postPetitionsAction()">OK</button>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default" ng-click="vm.clearAll()">Clear</button>
+			</div>
+		</div>
+	</fieldset> <!-- End Petition Details -->
+	
+</div> <!-- End container -->
+

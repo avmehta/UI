@@ -1,0 +1,43 @@
+<div class="container">
+
+<h1>{{vm.title}}</h1>
+
+<input type="file" id="fileUpload" />
+
+
+<input type="button" id="upload" value="Upload" ng-click="vm.upload()" />
+<input type="button" id="edit" value="Edit" ng-click="vm.edit()" />
+
+
+
+<table border=1> 
+	<tr ng-repeat="x in vm.name">{{x}}
+	<td ng-repeat="y in x track by $index"> {{ y }}</td>
+	</tr>
+</table>
+	
+<!-- <style>
+table, th, td {
+   border: 1px solid black;
+   padding:5px;
+}
+table {
+   border-collapse: collapse;
+   margin:10px;
+}
+</style>
+<body>
+<button ng-click="readCSV()">
+Display CSV as Data Table
+</button>
+<div id="divID">
+  <table>
+    <tr ng-repeat="x in data">
+      <td ng-repeat="y in x">{{ y }}</td>
+    </tr>
+  </table>
+</div>
+<div>
+<table>
+</table>
+</div> -->	

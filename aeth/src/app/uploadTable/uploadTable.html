@@ -1,0 +1,39 @@
+<div class="container">
+
+<h1>{{vm.title}}</h1>
+
+<input type="file" id="fileUpload" />
+
+
+<input type="button" id="upload" value="Upload" ng-click="vm.upload()" />
+
+
+
+<table class = "table" ng-show="vm.display">
+  <tr>
+  	<th> Edit </th>
+      <th ng-repeat="header in vm.head">{{header}}</th>
+  </tr>
+  <tr ng-repeat="data in vm.data">
+  <td>
+  	<input type="button" id="edit" value="Edit" ng-click="vm.edit(results)" />
+  	</td>
+    <td ng-repeat="header in vm.head">{{data[header]}}</td>
+  </tr>
+</table>
+
+<div ng-show = "vm.editTable">
+<input type = "button" id= "save" value = "Save" ng-click = "vm.save()">
+
+<table class = "table" ng-show="vm.editTable">
+  <tr>
+      <th ng-repeat="header in vm.head">{{header}}</th>
+  </tr>
+  <tr ng-repeat="data in vm.data">
+    <td ng-repeat="header in vm.head"><input type ="text" value = "{{data[header]}}"></td>
+  </tr>
+  
+</table>
+</div>
+
+

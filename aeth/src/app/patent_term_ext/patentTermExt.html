@@ -1,0 +1,73 @@
+<div class="container">
+
+<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- <div class="row topMargin30"></div>
+	
+	<div class="alert alert-danger" ng-show="vm.pteForm.errorFound">
+		<i class="fa fa-times"></i>
+		{{vm.pteForm.errorMsg}}
+	</div>
+	
+	<div class="alert alert-warning" ng-show="vm.pteForm.warningFound">
+		<i class="fa fa-exclamation"></i>
+		{{vm.pteForm.warningMsg}}
+	</div>
+		
+	<div class="alert alert-warning" ng-show="vm.pteForm.warningFound">
+		<i class="fa fa-check"></i>
+		{{vm.pteForm.warningMsg}}
+	</div>
+	
+	<div class="alert alert-success" ng-show="vm.pteForm.successFound">
+		<i class="alert-icon-success alert-icon"></i>
+		{{vm.pteForm.successMsg}}
+	</div> -->
+
+	<!-- Patent Term Extenstions -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Patent Term Extensions</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Application No:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="applicationNoId" ng-model="vm.pteForm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+		<label for="text" class="control-label col-md-2 col-md-offset-1">Responsible Party:</label>
+			<input type="radio" name="responsibleParty" ng-model="vm.pteForm.responsibleParty"  value="PTO" /> PTO
+			<input type="radio" name="responsibleParty" ng-model="vm.pteForm.responsibleParty" value="APPL" /> Applicant
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Extension Duration:</label>
+			<div class="col-md-2">
+					<input type="text" class="form-control form-control-width-md"
+						id="adjustmentDuration" ng-model="vm.pteForm.adjustmentDuration" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<label class="control-label col-md-2 col-md-offset-1" for="text">Reason:</label>
+			<div class="col-md-2">
+					<select class="form-control" id="sel1"
+					ng-model="vm.pteForm.reason">
+					<!-- ng-blur="vm.getReasonInfo()"> -->
+					<option value="NONE">NONE</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary" ng-click="vm.postPTEAction()">Submit</button>
+			</div>
+			<div class="col-md-1">
+						<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+		</div>
+		
+
+	</fieldset> <!-- End Patent Term Extensions -->
+	
+</div> <!-- End container -->

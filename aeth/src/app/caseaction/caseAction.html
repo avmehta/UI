@@ -1,0 +1,202 @@
+<div class="container">
+
+<div ng-include src="'app/utilities/alerts.html'"></div>
+
+	<!-- <div class="row topMargin40"></div>
+	<div class="alert alert-danger" ng-show="vm.caseActionForm.errorFound">
+		<i class="fa fa-times"></i>
+		{{vm.caseActionForm.errorMsg}}
+	</div>
+	
+	<div class="alert alert-warning" ng-show="vm.caseActionForm.warningFound">
+		<i class="fa fa-exclamation"></i>
+		{{vm.caseActionForm.warningMsg}}
+	</div>
+
+	<div class="alert alert-success"
+		ng-show="vm.caseActionForm.successFound">
+		<i class="fa fa-check"></i>
+		{{vm.caseActionForm.successMsg}}
+	</div> -->
+	
+	<!-- Office Actions -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Case Action</h2>
+		</legend>
+
+		<div class="row">
+
+			<label class="control-label col-md-2" for="text">Transaction:</label>
+			<div class="col-md-1">
+
+				<input type="text" class="form-control form-control-width-md"
+					id="transactionId" maxLength="4"
+					ng-model="vm.caseActionForm.postingTransaction"
+					ng-blur="vm.getSeletedActionDesc()"
+					typeahead="actionDetails.transactionNo as actionDetails.transactionNo for actionDetails in vm.actionList | filter:$viewValue | limitTo:8">
+			</div>
+			<div class="col-md-1">
+
+
+				<select class="form-control" id="transactionQualifierId"
+					ng-model="vm.caseActionForm.transactionQualifier"
+					ng-blur="vm.getSeletedQualifierDesc()"
+					ng-options="qualifier.transactionQualifier as qualifier.transactionQualifier for qualifier in vm.qualifierList">
+
+
+				</select>
+			</div>
+			<div class="col-md-7">
+
+
+				<select class="form-control" id="sel1"
+					ng-model="vm.caseActionForm.actionSelected"
+					ng-blur="vm.getSeletedActionNo()"
+					ng-options="actionDetails.contentEventCd as (actionDetails.transactionNo + '::'+actionDetails.transactionQualifier  + '::'+ actionDetails.descriptionTx ) for actionDetails in vm.actionList">
+
+
+				</select>
+
+
+			</div>
+		</div>
+		<div class="row inputTopMargin">
+			<div class="col-md-2">
+				<label for="text">Examiner No:</label>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="examinerNoId" ng-model="vm.caseActionForm.examinerNo">
+			</div>
+		</div>
+
+		<div class="row inputTopMargin">
+			<div class="col-md-2">
+				<label for="text">Group Art Unit:</label>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control form-control-width-md"
+					id="gauId" ng-model="vm.caseActionForm.gau">
+			</div>
+		</div>
+
+		<div class="row inputTopMargin">
+
+			<label class="control-label col-md-2 " for="text">Application
+				No:</label>
+			<div class="col-md-2">
+
+				<input type="text" class="form-control form-control-width-md"
+					id="applicationNoId" ng-model="vm.caseActionForm.applicationNo" ng-keyup="vm.searchKeyEvent($event)">
+			</div>
+
+
+
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<div class="row">
+
+					<fieldset class="fieldset">
+
+						<legend class="legendStyle">
+							<h2>Interview Summary</h2>
+						</legend>
+
+
+						<div class="col-md-2">
+							<label for="text">Date:</label>
+						</div>
+						<div class="col-md-6">
+							<span class="input-icon icon icon-calendar-o"></span> <input
+								id="dp1"
+								data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+								type="date" class="datepicker form-control"
+								ng-model="vm.caseActionForm.certificateMailDate">
+						</div>
+						<div class="col-md-1">
+							<input type="checkbox" id="gauId"
+								ng-model="vm.caseActionForm.gau">
+						</div>
+
+						<div class="col-md-3">
+							<label for="text">To Be Mailed</label>
+						</div>
+
+					</fieldset>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-4">
+				<div class="row">
+
+
+					<fieldset class="fieldset">
+						<legend class="legendStyle">
+							<h2>Abandonment</h2>
+						</legend>
+
+
+						<div class="col-md-2">
+							<label for="text">Date:</label>
+						</div>
+						<div class="col-md-7">
+							<span class="input-icon icon icon-calendar-o"></span> <input
+								id="dp1"
+								data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+								type="date" class="datepicker form-control"
+								ng-model="vm.caseActionForm.certificateMailDate">
+						</div>
+
+
+					</fieldset>
+
+				</div>
+			</div>
+		</div>
+		<div class="row topMargin30"></div>
+		<div class="row">
+			<div class="col-md-2 col-md-offset-4">
+
+				<button type="submit" class="btn btn-primary"
+					ng-click="vm.postCaseAction()">Ok</button>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+
+		</div>
+	</fieldset>
+	<!-- End Office Actions -->
+
+	<div class="row topMargin30"></div>
+
+
+	<!-- Transaction Log -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Transaction Log</h2>
+		</legend>
+
+		<table show-filter="true" class="table">
+			<tr>
+				<th>Application</th>
+				<th>Action</th>
+			
+
+			</tr>
+			<tr ng-repeat="user in vm.caseActionsLogData">
+
+				<td>{{user.applicationNumber}}</td>
+				<td>{{user.postingTransaction}}</td>
+			</tr>
+		</table>
+
+
+	</fieldset>
+	<!-- End Transaction Log -->
+
+</div>
+<!-- End container -->

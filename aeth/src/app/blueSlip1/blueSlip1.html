@@ -1,0 +1,127 @@
+<div class="container">
+
+
+	<!-- Application Details -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Issue Classification</h2>
+		</legend>
+		<div class="row">
+		<div class = "col-md-5">
+			<div class ="row">
+							<label>Application/Control No:</label>
+					<input type="text" class="form-control form-control-width-md"
+						ng-model="vm.applicationNo">			
+			</div>
+						<div class ="row">
+							<label>Examiner:</label>
+					<input type="text" class="form-control form-control-width-md"
+						ng-model="vm.examiner">			
+			</div>
+		</div>
+		<div class = "col-md-2"></div>
+		
+				<div class = "col-md-5">
+			<div class ="row">
+							<label>Applicant(s)/Patent Under Reexamination:</label>
+					<input type="text" class="form-control form-control-width-md"
+						ng-model="vm.reexam">			
+			</div>
+						<div class ="row">
+							<label>Art Unit:</label>
+					<input type="text" class="form-control form-control-width-md"
+						ng-model="vm.artUnit">			
+			</div>
+		</div>
+		</div>
+
+	
+	</fieldset> <!-- Issue Classification -->
+	
+	<div class="row topMargin30"></div>
+	
+	<!-- Data Verification -->
+		<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>CPC (OPTIONAL) </h2>
+		</legend>
+			<p>Symbol Classification: Symbols that have been prepopulated cannot be deleted or modified in OACS. If you wish to delete of change a sybol or the attribute associated therewith, please contact
+			your QN or use the Classification Allocation Tool (CAT)</p>
+			
+	<div class="row">
+	<div class = "col-md-3">
+	<div><label>Type</label></div>
+	
+    <label for="first">First:</label>
+    <input id="redRadio" type="radio" ng-model="vm.category" value="First" /><br />
+
+    <label for="inventive">Inventive:</label>
+    <input id="greenRadio" type="radio" ng-model="vm.category" value="Inventive" /><br />
+
+    <label for="additional">Additional:</label>
+    <input id="blueRadio" type="radio" ng-model="vm.category" value="Additional" /><br />
+    <br />
+    <strong>Selected Type:</strong> {{vm.category}}<br />
+    <br />
+    </div>
+    <div class="col=md-5">
+    <label>Version:</label>
+   <input type="text" ng-model="vm.version">
+    </div>
+</div>
+
+	</fieldset> <!-- End Data Verification -->
+	
+	
+	<div class="row topMargin30"></div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>US ORIGINAL CLASSIFICATION </h2>
+		</legend>
+		
+		
+		<div class="row">
+		<div class="col-md-3">
+			    <label>Class:</label>
+   <input type="text" ng-model="vm.class">
+		</div>
+		<div class="col-md-1"></div>
+				<div class="col-md-3">
+			    <label>Subclass:</label>
+   <input type="text" ng-model="vm.subclass">
+		</div>
+		</div>
+		<div class ="row">
+		<div class="col-md-offset-3">
+		<label>CROSS REFERENCE(S)</label>
+		</div>
+		</div>
+			<table show-filter="true" class="table table-striped table-info" >
+			<tr>
+				<th>CLASS</th>
+				<th colspan="5">SUBCLASS(ONE SUBCLASS PER BLOCK)</th>
+			</tr>
+			
+			 <tr>
+    <td>January</td>
+    <td>$100</td>
+    <td>$100</td>
+    <td>$100</td>
+    <td>$100</td>
+    <td>$100</td>
+    
+  </tr>
+			
+		</table>
+		
+		
+			</fieldset> 
+			
+							
+							
+							
+							
+>
+</div> <!-- End container -->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

@@ -1,0 +1,57 @@
+<div class="container">
+
+	<div class="alert alert-danger" ng-show="vm.unlockForm.errorFound">
+		<i class="fa fa-times"></i>
+		{{vm.unlockForm.errorMsg}}
+	</div>
+	
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Unlock Applications</h2>
+		</legend>
+		<div class="row">
+			<label class="control-label col-md-4 col-md-offset-1" for="applicationNoId">Application No (comma separated):</label>
+			<div class="col-md-2">
+				<textarea name="textarea" id="applicationNoId" cols="30" rows="5" ng-model="vm.applicationNumbers" ng-keyup="vm.searchKeyEvent($event)"></textarea>
+			</div>
+		</div>
+		
+
+		<div class="row">
+			<div class="col-md-1 col-md-offset-1">
+				<button type="submit" class="btn btn-primary" ng-click="vm.unlockApplications()">Unlock</button>
+			</div>
+			<div class="col-md-1">
+				<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+			</div>
+		</div>
+		
+
+	</fieldset> <!-- End Actions -->
+	
+	<!-- Transaction Log -->
+	<fieldset class="fieldset topMargin40">
+
+
+
+			<legend class="legendStyle">
+				<h2>Transaction Log</h2>
+			</legend>
+
+			<table show-filter="true" class="table">
+				<tr>
+					<th>Application Number</th>
+					<th>Description</th>
+				</tr>
+				<tr ng-repeat="status in vm.applicationTransactionLog" class="{{ status.setClass }}">
+
+					<td>{{status.applicationNumber}}</td>
+					<td><i class="{{status.setIcon }}"></i> {{status.messageDesc}}</td>
+					
+				</tr>
+			</table>
+
+
+		</fieldset>
+	
+</div> <!-- End container -->

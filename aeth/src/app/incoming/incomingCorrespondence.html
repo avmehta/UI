@@ -1,0 +1,194 @@
+<div class="container">
+	
+	<div ng-include src="'app/utilities/alerts.html'"></div>
+	
+	<!-- Incoming Correspondence -->
+	<fieldset class="fieldset">
+		<legend class="legendStyle">
+			<h2>Incoming Correspondence</h2>
+		</legend>
+		<form class="form-horizontal" role="form">
+			<div class="row">
+				<label class="control-label col-md-1" for="transaction">Transaction: </label>
+				<div class="col-md-1">
+					<input type="text" class="form-control form-control-width-md"
+						id="transaction" maxLength="4"
+						ng-model="vm.incomingForm.postingTransaction"
+						ng-blur="vm.getSeletedActionDesc()"
+						typeahead="actionDetails.transactionNo as actionDetails.transactionNo for actionDetails in vm.actionList | filter:$viewValue | limitTo:8">
+				</div>
+				<div class="col-md-1">
+					<select class="form-control" id="transactionQualifierId"
+						ng-model="vm.incomingForm.transactionQualifier"
+						ng-blur="vm.getSeletedQualifierDesc()"
+						ng-options="qualifier.transactionQualifier as  qualifier.transactionQualifier for qualifier in vm.qualifierList">
+					</select>
+				</div>
+				<div class="col-md-8">
+					<select class="form-control" id="sel1"
+						ng-model="vm.incomingForm.actionSelected"
+						ng-blur="vm.getSeletedActionNo()"
+						ng-options="actionDetails.contentEventCd as (actionDetails.transactionNo + '::'+actionDetails.transactionQualifier  + '::'+ actionDetails.descriptionTx ) for actionDetails in vm.actionList">
+					</select>
+				</div>
+			</div>
+
+			<div class="row topMargin40">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-3">
+							<label for="mailroomDate">Mailroom Date:</label>
+						</div>
+						<div class="col-md-5">
+							<span class="input-icon icon icon-calendar-o"></span> <input
+								id="mailroomDate"
+								data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+								type="date" class="datepicker form-control"
+								ng-model="vm.incomingForm.mailRoomDate">
+						</div>
+					</div>
+					<div class="row inputTopMargin">
+						<div class="col-md-3">
+							<label for="applicationNo">Application No:</label>
+						</div>
+						<div class="col-md-5">
+							<input type="text" class="form-control form-control-width-md"
+								ng-blur="vm.getRespActionsDetails()" maxLength="17" width="10px"
+								id="applicationNo" ng-model="vm.incomingForm.applicationNumber" ng-keyup="vm.searchKeyEvent($event)">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5">
+					<div class="row">
+					
+						<!-- Extension of Time -->
+						<fieldset class="fieldset">
+							<legend class="legendStyle">
+								<h2>Extension of Time</h2>
+							</legend>
+							<div class="row">
+								<div class="col-md-5">
+									<label for="timeExtension">Extension of Time:</label>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" id="timeExtension" ng-model="vm.incomingForm.extnTime">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5">
+									<label for="text">Time Granted:</label>
+								</div>
+								<div class="col-md-6">
+									<select id="sel1" class="form-control"
+										ng-init="vm.incomingForm.timeGranted = vm.timeGrantedOptions[0].value"
+										ng-model="vm.incomingForm.timeGranted"
+										ng-options="timeGrantedOption.value as timeGrantedOption.code for timeGrantedOption in vm.timeGrantedOptions">
+
+									</select>
+								</div>
+							</div>
+							<div class="row inputTopMargin">
+								<div class="col-md-5">
+									<label for="text" class="control-label">Certificate of
+										Mail Date:</label>
+								</div>
+								<div class="col-md-6">
+									<span class="input-icon icon icon-calendar-o"></span> <input
+										id="dp1"
+										data-inputmask="'mask': 'm/d/y', 'placeholder': 'mm/dd/yyyy'"
+										type="date" class="datepicker form-control"
+										ng-model="vm.incomingForm.certificateMailDate">
+								</div>
+							</div>
+						</fieldset> <!-- End Extension of Time -->
+						
+					</div>
+					
+					<!-- Examiner -->
+					<div class="row">
+						<fieldset class="fieldset">
+							<legend class="legendStyle">
+								<h2>Examiner</h2>
+							</legend>
+							<div class="row">
+								<div class="col-md-5">
+									<label for="text">Examiner No:</label>
+								</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control form-control-width-md"
+										id="examinerNoId" ng-model="vm.incomingForm.examinerNo">
+								</div>
+							</div>
+							<div class="row inputTopMargin">
+								<div class="col-md-5">
+									<label for="text">Group Art Unit:</label>
+								</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control form-control-width-md"
+										id="gauId" ng-model="vm.incomingForm.gau">
+								</div>
+							</div>
+						</fieldset> 
+					</div> <!-- End Examiner -->
+				</div>
+			</div>
+
+			<!--  Transaction To Respond -->
+			<div ng-show="vm.transRespTable">
+				<fieldset class="fieldset">
+					<legend class="legendStyle">
+						<h2>Transactions to Respond</h2>
+					</legend>
+					<table show-filter="true" class="table">
+						<tr>
+							<th></th>
+							<th>Content Event Code</th>
+							<th>Recorded Date</th>
+						</tr>
+						<tr ng-repeat="user in vm.respondTransactionData">
+
+							<td data-title="" header-class="'text-left'"><input
+								type="radio" ng-model="vm.selectedRow1" value="{{user}}"
+								name="aaa" id="{{user.seqNo}}"></td>
+
+							<td>{{user.contentEventCd}}</td>
+							<td>{{user.recordedDt}}</td>
+						</tr>
+					</table>
+				</fieldset>
+			</div> <!-- End Transactions to Respond -->
+
+			<div class="row topMargin30"></div>
+				<div class="row">
+					<div class="col-md-2 col-md-offset-3">
+						<button type="submit" class="btn btn-primary" ng-click="vm.postAction()">Submit</button>
+					</div>
+					<div class="col-md-1">
+						<button type="submit" class="btn btn-default" ng-click="vm.clear()">Clear</button>
+					</div>
+				</div>
+			</form>
+		</fieldset> <!-- End Incoming Correspondence -->
+		
+		<!-- Transaction Log -->
+		<fieldset class="fieldset">
+			<legend class="legendStyle">
+				<h2>Transaction Log</h2>
+			</legend>
+			<table ng-table="vm.tableParams" show-filter="true"
+				class="table ng-table-resizable-columns">
+				<tr ng-repeat="user in $data">
+					<td data-title="" header-class="'text-left'"><input
+						type="checkbox" id="mailroomDateId" ng-model="user.selectedRow">
+					</td>
+					<td data-title="'Application'" header-class="'text-left'"
+						sortable="'applId'" filter="{ 'applId': 'text' }">{{user.applId}}
+					</td>
+					<td data-title="'Description'" header-class="'text-right'"
+						sortable="'desc'" filter="{ 'desc': 'text' }">{{user.desc}}</td>
+				</tr>
+			</table>
+		</fieldset> <!-- End Transaction Log -->
+		
+</div> <!-- End container -->
